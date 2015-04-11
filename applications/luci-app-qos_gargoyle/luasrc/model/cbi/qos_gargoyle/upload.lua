@@ -15,10 +15,10 @@ name = s:option(Value, "name", translate("name"))
 
 pb = s:option(Value, "percent_bandwidth", translate("percent_bandwidth"), translate("percent of total bandwidth to use"))
 
-minb = s:option(Value, "min_bandwidth", translate("min_bandwidth"), translate("min bandwidth useage in absolute speed (kbit/s)"))
+minb = s:option(Value, "min_bandwidth", translate("min_bandwidth"), translate("min bandwidth usage in absolute speed (kbit/s)"))
 minb.datatype = "and(uinteger,min(0))"
 
-maxb = s:option(Value, "max_bandwidth", translate("max_bandwidth"), translate("max bandwidth useage in absolute speed (kbit/s)"))
+maxb = s:option(Value, "max_bandwidth", translate("max_bandwidth"), translate("max bandwidth usage in absolute speed (kbit/s)"))
 maxb.datatype = "and(uinteger,min(0))"
 
 minRTT = s:option(ListValue, "minRTT", translate("minRTT"))
@@ -76,11 +76,11 @@ dip = s:option(Value, "destination", translate("destination ip"), translate("<ab
 wa.cbi_add_knownips(dip)
 dip.datatype = "and(ipaddr)"
 
-dport = s:option(Value, "dstport", translate("destination port"), translate("<abbr title=\"check that packet has this destination port\">Help</abbr>"))
+dport = s:option(Value, "dstport", translate("destination port range"), translate("<abbr title=\"check that packet has this destination port or in this port range. i.e. 80-443\">Help</abbr>"))
 --dport.datatype = "and(uinteger,max(65536),min(1))"
 dport.datatype = "and(portrange)"
 
-sport = s:option(Value, "srcport", translate("source port"), translate("<abbr title=\"check that packet has this source port\">Help</abbr>"))
+sport = s:option(Value, "srcport", translate("source port range"), translate("<abbr title=\"check that packet has this source port or in this port range. i.e. 80-443\">Help</abbr>"))
 --sport.datatype = "and(uinteger,max(65536),min(1))"
 sport.datatype = "and(portrange)"
 
@@ -90,7 +90,7 @@ min_pkt_size.datatype = "and(uinteger,min(1))"
 max_pkt_size = s:option(Value, "max_pkt_size", translate("max_pkt_size"), translate("<abbr title=\"check that packet is no larger than this size (in bytes)\">Help</abbr>"))
 max_pkt_size.datatype = "and(uinteger,min(1))"
 
-connbytes_kb = s:option(Value, "connbytes_kb", translate("connbytes_kbyte"), translate("<abbr title=\"kbyte\">Help</abbr>"))
+connbytes_kb = s:option(Value, "connbytes_kb", translate("connbytes_kbyte"), translate("<abbr title=\"In kbyte\">Help</abbr>"))
 connbytes_kb.datatype = "and(uinteger,min(0))"
 
 layer7 = s:option(Value, "layer7", translate("layer7"), translate("<abbr title=\"check whether packet matches layer7 specification\">Help</abbr>"))
@@ -109,7 +109,7 @@ if pats then
 	pats:close()
 end
 
-ipp2p = s:option(Value, "ipp2p", translate("ipp2p"), translate("<abbr title=\"check wither packet matches ipp2p specification (used to recognize p2p protocols),ipp2p or all will match any of the specified p2p protocols, you can also specifically match any protocol listed in the documentation here: http://ipp2p.org/docu_en.html\">Help</abbr>"))
+ipp2p = s:option(Value, "ipp2p", translate("ipp2p"), translate("<abbr title=\"check whether packet matches ipp2p specification (used to recognize p2p protocols),ipp2p or all will match any of the specified p2p protocols, you can also specifically match any protocol listed in the documentation here: http://ipp2p.org/docu_en.html\">Help</abbr>"))
 ipp2p:value("ipp2p")
 ipp2p:value("all")
 

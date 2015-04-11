@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-04-14 10:33+0200\n"
 "PO-Revision-Date: 2012-09-03 17:57+0200\n"
-"Last-Translator: nKsyn <e.nksyn@gmail.com>\n"
+"Last-Translator: wongsyrone <wong.syrone@gmail.com>\n"
 "Language-Team: QQ Group:75543259 <axishero@foxmail.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgid "Qos_Gargoyle"
 msgstr "石像鬼QoS"
 
 msgid "Toggle QoS here."
-msgstr "启用/禁用QoS"
+msgstr "在此处切换 QoS 开关"
 
 msgid "global"
 msgstr "全局设置"
@@ -37,10 +37,10 @@ msgid "Disable QoS"
 msgstr "禁用QoS"
 
 msgid "In KBit/s."
-msgstr "以KBit/s为单位"
+msgstr "以 KBit/s 为单位"
 
 msgid "Choose an interface that QoS should be applied to."
-msgstr "选择一个进行QoS的接口。"
+msgstr "选择一个进行 QoS 的接口。"
 
 msgid "Global set"
 msgstr "全局设置"
@@ -61,13 +61,13 @@ msgid "UPLOAD"
 msgstr "上传设置"
 
 msgid "enable upload qos"
-msgstr "开启上传qos"
+msgstr "开启上传 QoS"
 
 msgid "default_class"
-msgstr "默认服务类型"
+msgstr "默认服务规则类型"
 
 msgid "total_bandwidth"
-msgstr "总带宽"
+msgstr "所选接口总带宽"
 
 msgid "DownLoad"
 msgstr "下载"
@@ -76,7 +76,7 @@ msgid "DOWNLOAD"
 msgstr "下载设置"
 
 msgid "enable download qos"
-msgstr "开启下载qos"
+msgstr "开启下载 QoS"
 
 msgid "UpLoad Set"
 msgstr "上传设置"
@@ -88,31 +88,31 @@ msgid "UpLoad set"
 msgstr "上传设置"
 
 msgid "upload_class"
-msgstr "上传分类"
+msgstr "上传规则分类"
 
 msgid "name"
 msgstr "服务类型名称"
 
 msgid "percent_bandwidth"
-msgstr "所占带宽百分率"
+msgstr "所占带宽百分比"
+
+msgid "percent of total bandwidth to use"
+msgstr "允许占用全部带宽的百分比"
 
 msgid "min_bandwidth"
 msgstr "最小保证带宽"
 
+msgid "min bandwidth usage in absolute speed (kbit/s)"
+msgstr "最小保证网速(kbit/s)"
+
 msgid "max_bandwidth"
 msgstr "最大带宽"
 
+msgid "max bandwidth usage in absolute speed (kbit/s)"
+msgstr "最大允许网速(kbit/s)"
+
 msgid "minRTT"
 msgstr "最小往返延时"
-
-msgid "percent of total bandwidth to use"
-msgstr "允许占用全部带宽的比例"
-
-msgid "min bandwidth useage in absolute speed (kbit/s)"
-msgstr "设置最小保证网速(kbit/s)"
-
-msgid "max bandwidth useage in absolute speed (kbit/s)"
-msgstr "设置最大允许网速(kbit/s)"
 
 msgid "Add"
 msgstr "添加"
@@ -121,40 +121,76 @@ msgid "upload_rule"
 msgstr "上传规则"
 
 msgid "class"
-msgstr "类型"
+msgstr "规则类型"
+
+msgid "<abbr title=\"name of bandwidth class to use if rule matches, this is required in each rule section\">Help</abbr>"
+msgstr "<abbr title=\"满足规则时使用的服务类型名称，该项对每条规则都是必选的\">帮助</abbr>"
 
 msgid "test_order"
 msgstr "测试顺序"
 
+msgid "<abbr title=\"an integer that specifies the order in which the rule should be checked for a match (lower numbers are checked first)\">Help</abbr>"
+msgstr "<abbr title=\"该项是一个整数，用来定义进行规则匹配时的先后顺序 (较小数字表示规则会被最先匹配)\">帮助</abbr>"
+
 msgid "proto"
 msgstr "协议"
 
+msgid "<abbr title=\"check that packet has this protocol (tcp, udp, both)\">Help</abbr>"
+msgstr "<abbr title=\"检测数据包协议 (TCP, UDP, 二者均有)\">帮助</abbr>"
+
 msgid "source ip"
-msgstr "源IP"
+msgstr "来源IP地址"
+
+msgid "<abbr title=\"check that packet has this source ip, can optionally have /[mask] after it (see -s option in iptables man page)\">Help</abbr>"
+msgstr "<abbr title=\"检测数据包来源IP，在其后可接 /[mask] 形式 (参见 iptables 手册页中的 -s 选项)\">帮助</abbr>"
 
 msgid "destination ip"
-msgstr "目标IP"
+msgstr "目标IP地址"
 
-msgid "destination port"
-msgstr "目标端口"
+msgid "<abbr title=\"check that packet has this destination ip, can optionally have /[mask] after it (see -d option in iptables man page)\">Help</abbr>"
+msgstr "<abbr title=\"检测数据包目标IP，在其后可接 /[mask] 形式 (参见 iptables 手册页中的 -d 选项)\">帮助</abbr>"
 
-msgid "source port"
-msgstr "源端口"
+msgid "destination port range"
+msgstr "目标端口范围"
+
+msgid "<abbr title=\"check that packet has this destination port or in this port range. i.e. 80-443\">Help</abbr>"
+msgstr "<abbr title=\"检测数据包目标端口或端口范围，端口范围形如：80-443\">帮助</abbr>"
+
+msgid "source port range"
+msgstr "来源端口范围"
+
+msgid "<abbr title=\"check that packet has this source port or in this port range. i.e. 80-443\">Help</abbr>"
+msgstr "<abbr title=\"检测数据包来源端口或端口范围，端口范围形如：80-443\">帮助</abbr>"
 
 msgid "min_pkt_size"
-msgstr "最小发送包"
+msgstr "数据包最小字节数"
+
+msgid "<abbr title=\"check that packet is at least this size (in bytes)\">Help</abbr>"
+msgstr "<abbr title=\"检测数据包的最小尺寸 (单位为字节)\">帮助</abbr>"
 
 msgid "max_pkt_size"
-msgstr "最大发送包"
+msgstr "数据包最大字节数"
+
+msgid "<abbr title=\"check that packet is no larger than this size (in bytes)\">Help</abbr>"
+msgstr "<abbr title=\"检测数据包的最大尺寸 (单位为字节)\">帮助</abbr>"
 
 msgid "connbytes_kbyte"
-msgstr "connbytes_kbyte"
+msgstr "连接字节数"
+
+msgid "<abbr title=\"In kbyte\">Help</abbr>"
+msgstr "<abbr title=\"单位为千字节\">帮助</abbr>"
 
 msgid "layer7"
-msgstr "L7"
+msgstr "七层过滤"
+
+msgid "<abbr title=\"check whether packet matches layer7 specification\">Help</abbr>"
+msgstr "<abbr title=\"检测数据包是否满足应用层过滤（七层过滤）规则\">帮助</abbr>"
 
 msgid "ipp2p"
-msgstr "ipp2p"
+msgstr "IPP2P"
+
+msgid "<abbr title=\"check whether packet matches ipp2p specification (used to recognize p2p protocols),ipp2p or all will match any of the specified p2p protocols, you can also specifically match any protocol listed in the documentation here: http://ipp2p.org/docu_en.html\">Help</abbr>"
+msgstr "<abbr title=\"检测数据包是否满足 IPP2P 规则 (用来辨识 P2P 协议)，ipp2p 或者 all 选项会匹配任何一种特定 P2P 协议，你也可以使用文档中定义的任何协议规则，文档参见：http://ipp2p.org/docu_en.html\">帮助</abbr>"
 
 msgid "DownLoad Set"
 msgstr "下载设置"
@@ -166,7 +202,7 @@ msgid "Download set"
 msgstr "下载设置"
 
 msgid "download_class"
-msgstr "下载分类"
+msgstr "下载规则分类"
 
 msgid "download_rule"
 msgstr "下载规则"
