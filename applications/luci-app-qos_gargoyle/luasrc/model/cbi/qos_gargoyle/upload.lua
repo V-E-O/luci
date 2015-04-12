@@ -27,10 +27,9 @@ minRTT:value("No")
 minRTT.default = "No"
 
 
-local tmp = "upload_rule"
-s = m:section(TypedSection, "upload_rule", translate(tmp))
+s = m:section(TypedSection, "upload_rule", translate("upload_rule"))
 s.addremove = true
---s.sortable = true
+s.sortable = true
 s.template = "cbi/tblsection"
 
 class = s:option(Value, "class", translate("class"), translate("<abbr title=\"name of bandwidth class to use if rule matches, this is required in each rule section\">Help</abbr>"))

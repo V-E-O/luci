@@ -29,7 +29,7 @@ minRTT.default = "No"
 
 s = m:section(TypedSection, "download_rule", translate("download_rule"))
 s.addremove = true
---s.sortable = true
+s.sortable = true
 --s.anonymous = true
 s.template = "cbi/tblsection"
 
