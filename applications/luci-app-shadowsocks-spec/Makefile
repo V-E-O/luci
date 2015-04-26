@@ -9,7 +9,7 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=shadowsocks spec LuCI Interface
-LUCI_DEPENDS:=
+LUCI_DEPENDS:=+shadowsocks-libev-spec
 
 include ../../luci.mk
 
