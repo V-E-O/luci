@@ -180,12 +180,6 @@ msgstr "连接字节数"
 msgid "<abbr title=\"In kbyte\">Help</abbr>"
 msgstr "<abbr title=\"单位为千字节\">帮助</abbr>"
 
-msgid "layer7"
-msgstr "七层过滤"
-
-msgid "<abbr title=\"check whether packet matches layer7 specification\">Help</abbr>"
-msgstr "<abbr title=\"检测数据包是否满足应用层过滤（七层过滤）规则\">帮助</abbr>"
-
 msgid "ipp2p"
 msgstr "IPP2P"
 

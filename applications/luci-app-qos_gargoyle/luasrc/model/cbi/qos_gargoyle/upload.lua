@@ -92,22 +92,6 @@ max_pkt_size.datatype = "and(uinteger,min(1))"
 connbytes_kb = s:option(Value, "connbytes_kb", translate("connbytes_kbyte"), translate("<abbr title=\"In kbyte\">Help</abbr>"))
 connbytes_kb.datatype = "and(uinteger,min(0))"
 
-layer7 = s:option(Value, "layer7", translate("layer7"), translate("<abbr title=\"check whether packet matches layer7 specification\">Help</abbr>"))
-local pats = io.popen("find /etc/l7-protocols/ -type f -name '*.pat'")
-if pats then
-	local l
-	while true do
-		l = pats:read("*l")
-		if not l then break end
-
-		l = l:match("([^/]+)%.pat$")
-		if l then
-			layer7:value(l)
-		end
-	end
-	pats:close()
-end
-
 ipp2p = s:option(Value, "ipp2p", translate("ipp2p"), translate("<abbr title=\"check whether packet matches ipp2p specification (used to recognize p2p protocols),ipp2p or all will match any of the specified p2p protocols, you can also specifically match any protocol listed in the documentation here: http://ipp2p.org/docu_en.html\">Help</abbr>"))
 ipp2p:value("ipp2p")
 ipp2p:value("all")
