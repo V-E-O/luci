@@ -1,6 +1,7 @@
 --[[
  Redsocks2 基础配置页面
  Copyright (C) 2015 GuoGuo <gch981213@gmail.com>
+ Modified by wongsyrone
 ]]--
 
 m = Map("redsocks2", translate("Redsocks2 - General Settings"),
@@ -21,16 +22,16 @@ s.anonymous = true
 s.addremove = true
 
 o = s:option(Value, "local_ip", translate("Local IP"))
-o.datatype = "ip4addr"
+o.datatype = "and(ip4addr)"
 
 o = s:option(Value, "local_port", translate("Local Port"))
-o.datatype = "uinteger"
+o.datatype = "and(uinteger)"
 
 o = s:option(Value, "ip", translate("Proxy Server IP"))
-o.datatype = "ip4addr"
+o.datatype = "and(ip4addr)"
 
 o = s:option(Value, "port", translate("Proxy Server Port"))
-o.datatype = "uinteger"
+o.datatype = "and(uinteger)"
 
 o = s:option(ListValue, "proxy_type", translate("Proxy Server Type"))
 o:value("shadowsocks", translate("Shadowsocks"))
@@ -71,7 +72,7 @@ o.rmempty = false
 
 o = s:option(Value, "timeout", translate("Timeout"))
 o:depends({autoproxy=1})
-o.datatype = "uinteger"
+o.datatype = "and(uinteger)"
 
 
 s = m:section(TypedSection, "redsocks2_udprelay", translate("UDP Relay"))
@@ -79,16 +80,16 @@ s.anonymous = true
 s.addremove = true
 
 o = s:option(Value, "local_ip", translate("Local IP"))
-o.datatype = "ip4addr"
+o.datatype = "and(ip4addr)"
 
 o = s:option(Value, "local_port", translate("Local Port"))
-o.datatype = "uinteger"
+o.datatype = "and(uinteger)"
 
 o = s:option(Value, "ip", translate("Proxy Server IP"))
-o.datatype = "ip4addr"
+o.datatype = "and(ip4addr)"
 
 o = s:option(Value, "port", translate("Proxy Server Port"))
-o.datatype = "uinteger"
+o.datatype = "and(uinteger)"
 
 o = s:option(ListValue, "proxy_type", translate("Proxy Server Type"))
 o:value("shadowsocks", translate("Shadowsocks"))
@@ -125,13 +126,13 @@ o = s:option(Value, "interface", translate("Outgoing interface"), translate("Out
 o:depends({proxy_type="direct"})
 
 o = s:option(Value, "udp_timeout", translate("UDP Timeout"))
-o.datatype = "uinteger"
+o.datatype = "and(uinteger)"
 
 o = s:option(Value, "dest_ip", translate("Destination IP"))
-o.datatype = "ip4addr"
+o.datatype = "and(ip4addr)"
 
 o = s:option(Value, "dest_port", translate("Destination Port"))
-o.datatype = "uinteger"
+o.datatype = "and(uinteger)"
 
 s = m:section(TypedSection, "redsocks2_iptables", translate("Iptables Redirect Settings"))
 s.anonymous = true
@@ -149,6 +150,6 @@ o = s:option(Value, "ipset_whitelist", translate("Whitelist Path"))
 o:depends({whitelist_enabled=1})
 
 o = s:option(Value, "dest_port", translate("Destination Port"))
-o.datatype = "uinteger"
+o.datatype = "and(uinteger)"
 
 return m

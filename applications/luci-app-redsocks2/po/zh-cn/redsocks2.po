@@ -17,7 +17,7 @@ msgid "Redsocks2 - General Settings"
 msgstr "Redsocks2 - 基础配置"
 
 msgid "A modified version of redsocks.Beside the basic function of redsocks,it can redirect TCP connections which are blocked via proxy automatically without a blacklist."
-msgstr "一个修改版redsocks.除了redsocks本来的功能之外,redsocks2可以在不需要黑名单的情况下自动判断目标连接情况,若被封锁则自动使用代理服务器."
+msgstr "一个修改版redsocks，除了Redsocks本来的功能之外，Redsocks2可以在不需要黑名单的情况下自动判断目标连接情况，若被封锁则自动使用代理服务器。"
 
 msgid "Basic Settings"
 msgstr "基础设置"
@@ -149,7 +149,13 @@ msgid "Cache File Path"
 msgstr "缓存文件路径"
 
 msgid "Stale Time"
-msgstr "缓存有效时间"
+msgstr "缓存有效时间(秒)"
+
+msgid "Seconds to stale an IP in cache since it is added into cache. Set it to 0 to disable cache stale."
+msgstr "<abbr title=\"整数，从一个IP被加入缓存时或从上次被判定为被屏蔽IP时开始，如果时间达到此设置值，则将此IP从缓存中清除，0 表示禁用缓存，减小此值有利于快速恢复个别IP因偶然被误判或短时间服务中断而被加入缓存的服务，增加此值有利于加入到被屏蔽IP的访问。\">帮助</abbr>"
 
 msgid "Autosave Interval"
-msgstr "自动保存时间间隔"
+msgstr "自动保存时间间隔(秒)"
+
+msgid "Interval for saving ip cache into file. Set it to 0 to disable autosave. <br /> When autosave_interval and stale_time are both 0, IP cache behaves like a static blacklist."
+msgstr "<abbr title=\"整数，自动保存缓存内容到文件的周期，0 表示不自动保存。不应该设置太小，频繁写入文件会影响正常转发的效率与响应速度。当缓存有效时间和自动保存时间间隔均为 0 时，IP缓存表现为静态黑名单\">帮助</abbr>"
