@@ -1,5 +1,5 @@
 
-m = Map("cpulimit", translate("cpulimit"),translate("Use cpulimit to limit app's cpu using."))
+m = Map("cpulimit", translate("cpulimit"),translate("Use cpulimit to restrict app's cpu usage."))
 s = m:section(TypedSection, "list", translate("Settings"))
 s.template = "cbi/tblsection"
 s.anonymous = true
@@ -9,11 +9,13 @@ enable = s:option(Flag, "enabled", translate("enable", "enable"))
 enable.optional = false
 enable.rmempty = false
 
-local pscmd="ps | awk '{print $5}' | sed '1d' | sort -k2n | uniq | sed '/^\\\[/d' | sed '/sed/d' | sed '/awk/d' | sed '/hostapd/d' | sed '/pppd/d' | sed '/mwan3/d' | sed '/sleep/d' | sed '/sort/d' | sed '/ps/d' | sed '/uniq/d' | awk -F '/' '{print $NF}'"
+-- pick 3rd part;delete 1st line;sort and unique;delete lines started with '[' and '{';delete basic command using extend regexp;pick the last part divided by '/'
+-- hope this works and make sure your sed command has '-r' or '-E' option
+local pscmd="ps | awk '{print $3}' | sed '1d' | sort | uniq | sed '/^\[/d' | sed '/^{/d' | sed -E '/(sed|awk|hostapd|pppd|mwan3|sleep|sort|uniq|ps)/d' | awk -F'/' '{print $NF}'"
 local shellpipe = io.popen(pscmd,"r")
 
 
-exename = s:option(Value, "exename", translate("exename"), translate("name of the executable program file.CAN NOT BE A PATH!"))
+exename = s:option(Value, "exename", translate("Executable Name"), translate("Name of the executable program file. Should NOT Be a Path!"))
 exename.optional = false
 exename.rmempty = false
 exename.default = "vsftpd"
@@ -21,7 +23,7 @@ for psvalue in shellpipe:lines() do
 	exename:value(psvalue)
 end
 
-limit = s:option(Value, "limit", translate("limit"))
+limit = s:option(Value, "limit", translate("Usage restrictions"))
 limit.optional = false
 limit.rmempty = false
 limit.default = "50"
