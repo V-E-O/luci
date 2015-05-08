@@ -9,16 +9,16 @@ enable = s:option(Flag, "enabled", translate("enable", "enable"))
 enable.optional = false
 enable.rmempty = false
 
--- pick 3rd part;delete 1st line;sort and unique;delete lines started with '[' and '{';delete basic command using extend regexp;pick the last part divided by '/'
--- hope this works and make sure your sed command has '-r' or '-E' option
-local pscmd="ps | awk '{print $3}' | sed '1d' | sort | uniq | sed '/^\[/d' | sed '/^{/d' | sed -E '/(sed|awk|hostapd|pppd|mwan3|sleep|sort|uniq|ps)/d' | awk -F'/' '{print $NF}'"
+-- pick 3rd part;delete 1st line;delete lines started with '[' and '{';delete basic command using extend regexp;pick the last part divided by '/';sort the list
+-- make sure your sed command has '-r' or '-E' option
+local pscmd="ps | awk '{print $3}' | sed '1d' | sed '/^\\[/d' | sed '/^{/d' | sed -E '/(-ash|sh|sed|awk|hostapd|pppd|mwan3|sleep|sort|uniq|ps|insmod|rmmod|odhcp6c)/d' | awk -F'/' '{print $NF}' | sort -u"
 local shellpipe = io.popen(pscmd,"r")
 
 
 exename = s:option(Value, "exename", translate("Executable Name"), translate("Name of the executable program file. Should NOT Be a Path!"))
 exename.optional = false
 exename.rmempty = false
-exename.default = "vsftpd"
+exename.default = "dnsmasq"
 for psvalue in shellpipe:lines() do
 	exename:value(psvalue)
 end
