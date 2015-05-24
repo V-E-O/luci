@@ -10,3 +10,5 @@ LUCI_TITLE:=LuCI support for the MWAN3 multiwan hotplug script
 LUCI_DEPENDS:=+mwan3 +luci-mod-admin-full +luci-app-firewall +luci-lib-nixio
 
 include ../../luci.mk
+
+# call BuildPackage - OpenWrt buildroot signature
