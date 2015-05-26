@@ -1,0 +1,319 @@
+#!/bin/sh
+# load-balance(N-WAN) Script VER 1.1d 2011.1.6 for openwrt  by QQ GROUP 120752328
+# Modified by wongsyrone
+
+echo $$ > /tmp/nwan/nwanroute_new.pid
+kill -9 `cat /tmp/nwan/nwanroute_old.pid`
+cp /tmp/nwan/nwanroute_new.pid /tmp/nwan/nwanroute_old.pid 
+
+
+. /lib/functions.sh
+
+logpath=/tmp/nwan_log
+
+
+from_internet_get_route()
+{
+mkdir -p /tmp/routes
+cd /tmp/routes
+# download routing table from tcp5.com
+# user:tcp5;password:2911911
+curl --silent --retry 3 --retry-delay 1 --user tcp5:2911911 http://www.tcp5.com/table/mobile.rsc|grep lookup|awk -F "=" '{print $5}'|awk -F " " '{print $1}' > mobile.rsc
+curl --silent --retry 3 --retry-delay 1 --user tcp5:2911911 http://www.tcp5.com/table/other.rsc|grep lookup|awk -F "=" '{print $5}'|awk -F " " '{print $1}' > other.rsc
+curl --silent --retry 3 --retry-delay 1 --user tcp5:2911911 http://www.tcp5.com/table/telecom.rsc|grep lookup|awk -F "=" '{print $5}'|awk -F " " '{print $1}' > telecom.rsc
+curl --silent --retry 3 --retry-delay 1 --user tcp5:2911911 http://www.tcp5.com/table/unicom.rsc|grep lookup|awk -F "=" '{print $5}'|awk -F " " '{print $1}' > unicom.rsc
+cp mobile.rsc /lib/nwan/
+cp other.rsc /lib/nwan/
+cp telecom.rsc /lib/nwan/
+cp unicom.rsc /lib/nwan/
+rm -rf /tmp/routes
+}
+
+
+
+ip_ru_del_0(){
+ip ru|awk '/^0:/'|grep -v local|cut  -d ":" -f2 | while read del_ru 
+do 
+ip ru del $del_ru 
+done
+}
+
+set_rtTables () {
+#
+# reserved values
+#
+#	echo 255 local > /etc/iproute2/rt_tables
+#	echo 254 main >> /etc/iproute2/rt_tables
+#	echo 253 default >> /etc/iproute2/rt_tables
+#	echo 0 unspec >> /etc/iproute2/rt_tables
+	local n
+	local RT
+	
+	n=200
+	RT=${1}_rt
+	if [ -z "`cat /etc/iproute2/rt_tables | grep $RT`" ] ; then
+		while [ "`cat /etc/iproute2/rt_tables | grep "^$n"`" ]
+		do
+			n=`expr $n + 1`
+		done
+		echo "$n $RT" >> /etc/iproute2/rt_tables 
+	#	log_debug 5 "set_rt_Tables:$n $RT"
+		n=`expr $n + 1`
+	fi
+	eval ${1}_RT_TABLE=$RT
+	# log_debug 5 "set_rt_Tables:${1}_RT_TABLE=$RT.....OK"
+}
+
+add_routes()
+{
+ip_ru_del_0
+ip_ru_del_0
+ip_ru_del_0
+
+
+NETLIST=/lib/nwan/${name}.rsc
+if [ -f $NETLIST ]; then
+        MY_LINE_NO=1
+        while read MY_LINE
+        do
+#local RUN="iptables -t mangle -A PREROUTING -d $MY_LINE -j MARK --set-mark $mark" 
+#[ "$log_record" = "5" ]&&echo add iptables:$RUN >> $logpath
+local RUN="ip rule add to $MY_LINE table ${ifc}_rt"
+[ "$log_record" = "5" ]&&echo add ip ru:$RUN >> $logpath
+eval $RUN  
+          MY_LINE_NO=$((MY_LINE_NO+1))
+        done < $NETLIST
+fi
+}
+
+config_wan_load_ifup(){
+local cfg="$1"
+local ifc="$1"
+
+local proto device gateway ipaddr dns nwan weight name route up
+
+config_get proto "$cfg" proto
+
+device=$(uci_get_state network.$cfg.ifname)
+
+gateway=$(uci_get_state network "$cfg" gateway)
+dns=$(uci_get_state network  "$cfg" dns)
+ipaddr=$(uci_get_state network  "$cfg" ipaddr)
+up=$(uci_get_state network "$cfg" up)
+
+config_get nwan "$cfg" nwan 0
+config_get weight "$cfg" weight 1
+config_get name "$cfg" name
+config_get route "$cfg" route  balance
+
+ 
+mark=$(($mark+10))
+uci set network.$cfg.mark="$mark"
+
+
+
+[ "$nwan" = 1 -a "$up" = 1 ] && {
+
+echo "0" > /proc/sys/net/ipv4/conf/${device}/rp_filter 
+
+if [ "$proto" = "pppoe" ];
+then
+[ "$route" = "balance" ]&&append default_route " nexthop via $ipaddr dev $device weight $weight "
+else
+[ "$route" = "balance" ]&&append default_route " nexthop via $gateway dev $device weight $weight "
+fi
+
+[ "$route" = "intelligent_routes" ]&&add_routes
+
+
+[ "$log_record" = "5" ]&&echo total default route : $total_route  >> $logpath
+ip route del default 
+ip route del default 
+ip route del default 
+[ ! "$proto" = "pppoe" ]&&ip route add default via $gateway dev $device
+[ "$proto" = "pppoe" ]&&ip route add default via $ipaddr dev $device
+
+ 
+
+#set_rtTables
+
+set_rtTables $ifc 
+ 
+# add ip to rule 
+ip_ru_del_0 
+
+local RUN="ip rule add from $ipaddr table ${ifc}_rt"
+[ "$log_record" = "5" ]&&echo add ip to rule: $RUN  >> $logpath
+eval $RUN
+
+# add DNS  to rule 
+ip_ru_del_0 
+for WAN_DNS in $dns
+     do
+          if [ ! "$WAN_DNS" = "0.0.0.0" ]; then
+          local RUN="ip rule add to $WAN_DNS table ${ifc}_rt"
+            [ "$log_record" = "5" ]&&echo add DNS to rule : $RUN  >> $logpath
+           eval $RUN 
+          fi
+    done
+
+# add mark to rule 
+ip_ru_del_0
+
+local RUN="ip rule add fwmark $mark table ${ifc}_rt"
+[ "$log_record" = "5" ]&&echo  add mark to rule : $RUN >> $logpath
+eval $RUN
+#echo “Set PREROUTING…”
+
+#所有wan进入的包(NEW)都标记为 mark,走Wan 策略路由
+
+#local RUN="iptables -t mangle -A NWANPRE -i $device -m conntrack  --ctstate NEW  -j CONNMARK --set-mark $mark"
+local RUN="iptables -t mangle -A NWANPRE -i $device -m state --state NEW  -j CONNMARK --set-mark $mark"
+[ "$log_record" = "5" ]&&echo  Set NWANPREROUTING… : $RUN >> $logpath
+eval $RUN 
+#echo “Set POSTROUTING…”
+#所有WAN1出去的包
+#local RUN="iptables -t mangle -A NWANPOS -o $device  -m conntrack  --ctstate NEW  -j CONNMARK --set-mark $mark"
+local RUN="iptables -t mangle -A NWANPOS -o $device  -m state --state NEW  -j CONNMARK --set-mark $mark"
+[ "$log_record" = "5" ]&&echo  et NWANPOSTROUTING… : $RUN >> $logpath
+eval $RUN 
+
+
+# add ip route to table
+
+    ip route flush table ${ifc}_rt
+    ip route | grep -v nexthop|while read ROUTE 
+         do 
+            if [ ! "$ROUTE" = "default" ]; then
+
+              local RUN="ip route append table ${ifc}_rt to $ROUTE"
+              [ "$log_record" = "5" ]&&echo add ip route to table: $RUN  >> $logpath
+              eval $RUN 
+           fi
+         done 
+
+ip route del table ${ifc}_rt default 
+ip route del table ${ifc}_rt default 
+[ ! "$proto" = "pppoe" ]&&ip route add default via $gateway dev $device table ${ifc}_rt
+[ "$proto" = "pppoe" ]&&ip route add default via $ipaddr dev $device table ${ifc}_rt
+
+}
+
+}
+
+
+
+main_int()
+{	
+
+ip rule flush 
+ip rule flush 
+ip rule flush 
+ip rule del table main 
+ip rule del table default 
+ip rule add lookup main prio 32766 
+ip rule add lookup default prio 32767	 
+default_route=$NULL 
+
+	local default_route=""
+	local mark=0
+	config_load network
+	config_foreach config_wan_load_ifup interface
+
+	eval "ip route change  default scope global  $default_route"
+
+
+#所有LAN进入并且已经建立连接的包,恢复MARK
+lan_ifname=$(uci_get network.lan.ifname)
+local RUN="iptables -t mangle -A NWANPRE -i $lan_ifname -m conntrack --ctstate ESTABLISHED,RELATED -j CONNMARK --restore-mark"
+ [ "$log_record" = "5" ]&&echo 所有LAN进入并且已经建立连接的包,恢复MARK: $RUN  >> $logpath
+ eval $RUN
+local RUN="iptables -t mangle -A NWANOUT -m conntrack --ctstate ESTABLISHED,RELATED -j CONNMARK --restore-mark"
+ [ "$log_record" = "5" ]&&echo 所有LAN进入并且已经建立连接的包,output: $RUN  >> $logpath
+ eval $RUN
+ 
+ }
+
+
+remove_wan () {
+	# INTERFACE = ${INTERFACE} wan_NO 
+	local RUN="ip route flush table ${INTERFACE}_rt"
+	eval "$RUN> /dev/null"
+		
+ip rule | grep ${INTERFACE} | awk {'print "ip rule del " $2 " " $3 " " $4 " " $5 " "'}|while read del_rule
+do 
+$del_rule
+done
+			uci -P /var/state revert nwan.${INTERFACE}
+			uci -P /var/state revert network.${INTERFACE}.gateway
+
+}
+
+
+
+
+route_start(){
+
+main_int 
+sh /lib/nwan/assingout
+ip route flush cache  
+ip route flush cache  
+uci commit network
+
+}
+
+
+nwan_setting_get()
+{
+
+config_get dl_route_table $1 dl_route_table 0
+config_get nwan_enable $1 enable 0
+config_get log_record $1 debug
+config_get pppoeupall $1 pppoeupall
+config_get interval $1 interval 0
+config_get opt $1 opt 0
+
+[ "$dl_route_table" = "1" ]&&from_internet_get_route
+
+# add crontabs task 
+. /lib/cron/common.sh	 
+	if  [ "$pppoeupall" == "1" -a "$interval" != "0" ]; then 
+delete_task pppoeup_scheduler
+add_task pppoeup_scheduler "sh /lib/nwan/onlinecheck" ${interval}
+	else 
+delete_task pppoeup_scheduler
+	fi
+
+if [ "$opt" == "1" ]; then 
+echo -1 > /proc/sys/net/ipv4/rt_cache_rebuild_count
+else 
+echo 4 > /proc/sys/net/ipv4/rt_cache_rebuild_count
+fi
+
+iptables -t mangle -N NWANPRE 
+iptables -t mangle -N NWANPOS
+iptables -t mangle -N NWANOUT
+
+iptables -t mangle -F NWANPRE
+iptables -t mangle -F NWANPOS
+iptables -t mangle -F NWANOUT
+
+[ -z "$(iptables -t mangle -nxvL OUTPUT |grep NWANOUT)" ]&&iptables -t mangle -I OUTPUT -j NWANOUT
+[ -z "$(iptables -t mangle -nxvL PREROUTING |grep NWANPRE)" ]&&iptables -t mangle -I PREROUTING -j NWANPRE
+[ -z "$(iptables -t mangle -nxvL POSTROUTING |grep NWANPOS)" ]&&iptables -t mangle -I POSTROUTING -j NWANPOS
+
+}
+
+config_load nwan
+config_foreach nwan_setting_get settings
+
+case $1 in
+	start|ifup_start|restart)
+	route_start 2>/dev/null  2>/dev/null
+	;;
+ifdown_start)
+        remove_wan  2>/dev/null
+	;;
+esac
+
+
