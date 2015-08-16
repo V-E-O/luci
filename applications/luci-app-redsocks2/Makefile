@@ -9,7 +9,7 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=Redsocks2 LuCI Interface (OpenSSL)
-LUCI_DEPENDS:=+redsocks2-openssl
+LUCI_DEPENDS:=+redsocks2
 
 include ../../luci.mk
 
