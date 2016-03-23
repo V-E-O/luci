@@ -6,8 +6,8 @@
 
 include $(TOPDIR)/rules.mk
 
-LUCI_TITLE:=Network Shares - Samba 4.3.x SMB/CIFS module
-LUCI_DEPENDS:=+samba43-server
+LUCI_TITLE:=Network Shares - Samba 4.4.x SMB/CIFS module
+LUCI_DEPENDS:=+samba44-server
 
 include ../../luci.mk
 
