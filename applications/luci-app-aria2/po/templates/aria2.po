@@ -2,88 +2,88 @@ msgid "Aria2"
 msgstr ""
 
 msgid "Aria2 is a multi-protocol &amp; multi-source download utility, here you can configure the settings."
-msgstr "Aria2 是一个支持多协议多线程的下载器, 你可以在这里对其进行配置."
+msgstr ""
 
 msgid "Aria2 Status"
-msgstr "Aria2 状态"
+msgstr ""
 
 msgid "Open YAAW"
-msgstr "打开YAAW"
+msgstr ""
 
 msgid "Open WebUI-Aria2"
-msgstr "打开WebUI-Aria2"
+msgstr ""
 
 msgid "The Aria2 service is running."
-msgstr "Aria2 正在运行"
+msgstr ""
 
 msgid "The Aria2 service is not running."
-msgstr "Aria2 未运行"
+msgstr ""
 
 msgid "Aria2 Settings"
-msgstr "Aria2 配置"
+msgstr ""
 
 msgid "General settings"
-msgstr "一般设置"
+msgstr ""
 
 msgid "Files and Locations"
-msgstr "文件和目录"
+msgstr ""
 
 msgid "Enabled"
-msgstr "启用"
+msgstr ""
 
 msgid "Task Settings"
-msgstr "任务设置"
+msgstr ""
 
 msgid "BitTorrent Settings"
-msgstr "BT设置"
+msgstr ""
 
 msgid "Run daemon as user"
-msgstr "以此用户权限运行"
+msgstr ""
 
 msgid "RPC port"
-msgstr "RPC端口"
+msgstr ""
 
 msgid "RPC authentication method"
-msgstr "RPC认证方式"
+msgstr ""
 
 msgid "No Authentication"
-msgstr "无认证"
+msgstr ""
 
 msgid "Username & Password"
-msgstr "用户名与密码"
+msgstr ""
 
 msgid "Token"
-msgstr "令牌"
+msgstr ""
 
 msgid "RPC username"
-msgstr "RPC用户名"
+msgstr ""
 
 msgid "RPC password"
-msgstr "RPC密码"
+msgstr ""
 
 msgid "RPC Token"
-msgstr "RPC令牌"
+msgstr ""
 
 msgid "Generate Randomly"
-msgstr "随机生成"
+msgstr ""
 
 msgid "Config file directory"
-msgstr "配置文件目录"
+msgstr ""
 
 msgid "Default download directory"
-msgstr "默认下载目录"
+msgstr ""
 
 msgid "Disk cache"
-msgstr "磁盘缓存"
+msgstr ""
 
 msgid "in bytes, You can append K or M."
-msgstr "单位 B, 你可以在数字后跟上 K 或 M."
+msgstr ""
 
 msgid "Preallocation"
-msgstr "磁盘预分配"
+msgstr ""
 
 msgid "Off"
-msgstr "关闭"
+msgstr ""
 
 msgid "Prealloc"
 msgstr ""
@@ -95,82 +95,82 @@ msgid "Falloc"
 msgstr ""
 
 msgid "\"Falloc\" is not available in all cases."
-msgstr "\"Falloc\" 并不是在所有情况下都可用."
+msgstr ""
 
 msgid "Overall speed limit enabled"
-msgstr "启用全局限速"
+msgstr ""
 
 msgid "Overall download limit"
-msgstr "全局下载限速"
+msgstr ""
 
 msgid "in bytes/sec, You can append K or M."
-msgstr "单位 B/s, 你可以在数字后跟上 K 或 M."
+msgstr ""
 
 msgid "Overall upload limit"
-msgstr "全局上传限速"
+msgstr ""
 
 msgid "Per task speed limit enabled"
-msgstr "启用单任务限速"
+msgstr ""
 
 msgid "Per task download limit"
-msgstr "单任务下载限速"
+msgstr ""
 
 msgid "Per task upload limit"
-msgstr "单任务上传限速"
+msgstr ""
 
 msgid "Max concurrent downloads"
-msgstr "最大同时下载任务数"
+msgstr ""
 
 msgid "Max connection per server"
-msgstr "单服务器最大连接数"
+msgstr ""
 
 msgid "Min split size"
-msgstr "最小文件分片大小"
+msgstr ""
 
 msgid "Max number of split"
-msgstr "单文件最大线程数"
+msgstr ""
 
 msgid "Autosave session interval"
-msgstr "定时保存会话间隔"
+msgstr ""
 
 msgid "Sec"
-msgstr "秒"
+msgstr ""
 
 msgid "User agent value"
-msgstr "用户代理(UA)"
+msgstr ""
 
 msgid "<abbr title=\"Distributed Hash Table\">DHT</abbr> enabled"
-msgstr "启用<abbr title=\"分布式哈希表\">DHT</abbr>"
+msgstr ""
 
 msgid "<abbr title=\"Local Peer Discovery\">LPD</abbr> enabled"
-msgstr "启用<abbr title=\"本地节点发现\">LPD</abbr>"
+msgstr ""
 
 msgid "Follow torrent"
-msgstr "自动添加下载的种子"
+msgstr ""
 
 msgid "BitTorrent listen port"
-msgstr "BT监听端口"
+msgstr ""
 
 msgid "Max number of peers per torrent"
-msgstr "单个种子最大连接数"
+msgstr ""
 
 msgid "Additional Bt tracker enabled"
-msgstr "添加额外的Tracker"
+msgstr ""
 
 msgid "List of additional Bt tracker"
-msgstr "附加Tracker列表"
+msgstr ""
 
 msgid "Prefix of peer ID"
-msgstr "Peer ID前缀"
+msgstr ""
 
 msgid "Extra Settings"
-msgstr "附加选项"
+msgstr ""
 
 msgid "List of extra settings"
-msgstr "附加选项列表"
+msgstr ""
 
 msgid "View Json-RPC URL"
-msgstr "查看 Json-RPC URL"
+msgstr ""
 
 msgid "Use WebSocket"
-msgstr "使用WebSocket"
+msgstr ""
