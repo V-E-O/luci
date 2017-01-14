@@ -16,11 +16,13 @@ msgid "Activate wifi"
 msgstr "WiFiのアクティブ化"
 
 msgid "Could not find required /usr/bin/wifi_schedule.sh or /sbin/wifi"
-msgstr ""
-"必須の /usr/bin/wifi_schedule.sh または /sbin/wifi が見つかりませんでした。"
+msgstr "必須の /usr/bin/wifi_schedule.sh または /sbin/wifi が見つかりませんでした。"
 
 msgid "Could not find required programm /usr/bin/iwinfo"
 msgstr "必須のプログラム /usr/bin/iwinfo が見つかりませんでした。"
+
+msgid "Cron Jobs"
+msgstr "Cronジョブ"
 
 msgid "Day(s) of Week"
 msgstr "曜日"
@@ -82,8 +84,8 @@ msgstr "WiFiの停止"
 msgid "Sunday"
 msgstr "日曜日"
 
-msgid "The value '"
-msgstr ""
+msgid "The value %s is invalid"
+msgstr "%s の値が無効です"
 
 msgid "Thursday"
 msgstr "木曜日"
@@ -106,8 +108,5 @@ msgstr "水曜日"
 msgid "Wifi Schedule"
 msgstr "WiFi スケジュール"
 
-#~ msgid "Cron Jobs"
-#~ msgstr "Cronジョブ"
-
-#~ msgid "Wifi Schedule Logfile"
-#~ msgstr "WiFiスケジュール ログファイル"
+msgid "Wifi Schedule Logfile"
+msgstr "WiFiスケジュール ログファイル"
