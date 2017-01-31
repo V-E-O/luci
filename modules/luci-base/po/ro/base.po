@@ -1303,6 +1303,9 @@ msgstr ""
 msgid "IKE DH Group"
 msgstr ""
 
+msgid "IP Addresses"
+msgstr ""
+
 msgid "IP address"
 msgstr "Adresa IP"
 
@@ -1394,6 +1397,9 @@ msgid "IPv6 routed prefix"
 msgstr ""
 
 msgid "IPv6-Address"
+msgstr ""
+
+msgid "IPv6-PD"
 msgstr ""
 
 msgid "IPv6-in-IPv4 (RFC4213)"
@@ -2313,6 +2319,9 @@ msgstr ""
 msgid "Pre-emtive CRC errors (CRCP_P)"
 msgstr ""
 
+msgid "Prefix Delegated"
+msgstr ""
+
 msgid "Preshared Key"
 msgstr ""
 
@@ -2476,6 +2485,9 @@ msgstr ""
 
 msgid "Receiver Antenna"
 msgstr "Antena receptorului"
+
+msgid "Recommended. IP addresses of the WireGuard interface."
+msgstr ""
 
 msgid "Reconnect this interface"
 msgstr "Reconecteaza aceasta interfata"
@@ -3229,6 +3241,9 @@ msgstr ""
 
 msgid "USB Device"
 msgstr "Dispozitiv USB"
+
+msgid "USB Ports"
+msgstr ""
 
 msgid "UUID"
 msgstr "UUID"

@@ -1325,6 +1325,9 @@ msgstr ""
 msgid "IKE DH Group"
 msgstr ""
 
+msgid "IP Addresses"
+msgstr ""
+
 msgid "IP address"
 msgstr "IP 주소"
 
@@ -1417,6 +1420,9 @@ msgstr ""
 
 msgid "IPv6-Address"
 msgstr "IPv6-주소"
+
+msgid "IPv6-PD"
+msgstr ""
 
 msgid "IPv6-in-IPv4 (RFC4213)"
 msgstr ""
@@ -2342,6 +2348,9 @@ msgstr ""
 msgid "Pre-emtive CRC errors (CRCP_P)"
 msgstr ""
 
+msgid "Prefix Delegated"
+msgstr ""
+
 msgid "Preshared Key"
 msgstr ""
 
@@ -2506,6 +2515,9 @@ msgid "Receive"
 msgstr ""
 
 msgid "Receiver Antenna"
+msgstr ""
+
+msgid "Recommended. IP addresses of the WireGuard interface."
 msgstr ""
 
 msgid "Reconnect this interface"
@@ -3123,8 +3135,8 @@ msgid ""
 "There is no password set on this router. Please configure a root password to "
 "protect the web interface and enable SSH."
 msgstr ""
-"이 공유기에 암호 설정이 되지 않았습니다. 웹 UI 와 SSH 부분을 보호하기 "
-"위해서 꼭 root 암호를 설정해 주세요."
+"이 공유기에 암호 설정이 되지 않았습니다. 웹 UI 와 SSH 부분을 보호하기 위해서 "
+"꼭 root 암호를 설정해 주세요."
 
 msgid "This IPv4 address of the relay"
 msgstr ""
@@ -3281,6 +3293,9 @@ msgid "UMTS/GPRS/EV-DO"
 msgstr ""
 
 msgid "USB Device"
+msgstr ""
+
+msgid "USB Ports"
 msgstr ""
 
 msgid "UUID"
