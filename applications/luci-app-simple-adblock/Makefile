@@ -6,10 +6,10 @@ include $(TOPDIR)/rules.mk
 PKG_LICENSE:=GPL-3.0+
 PKG_MAINTAINER:=Stan Grishin <stangri@melmac.net>
 
-LUCI_TITLE:=VPN Bypass Web UI
-LUCI_DEPENDS:=+vpnbypass
+LUCI_TITLE:=Simple Adblock Web UI
+LUCI_DEPENDS:=+simple-adblock
 LUCI_PKGARCH:=all
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 include ../../luci.mk
 

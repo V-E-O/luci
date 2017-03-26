@@ -6,12 +6,11 @@
 
 include $(TOPDIR)/rules.mk
 
-LUCI_TITLE:=LuCI support for the MWAN3 multiwan hotplug script
-LUCI_DEPENDS:=+mwan3 +luci-mod-admin-full +luci-app-firewall +luci-lib-nixio
+LUCI_TITLE:=Cloudshark capture tool Web UI
+LUCI_DEPENDS:=+cshark
 LUCI_PKGARCH:=all
-PKG_LICENSE:=GPLv2
 
-PKG_MAINTAINER:=Aedan Renner <chipdankly@gmail.com>
+PKG_MAINTAINER:=Luka Perkov <luka@openwrt.org>
 
 include ../../luci.mk
 
