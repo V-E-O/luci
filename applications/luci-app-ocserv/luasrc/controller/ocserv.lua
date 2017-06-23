@@ -33,7 +33,7 @@ function index()
 end
 
 function ocserv_status()
-	local ipt = io.popen("/usr/bin/occtl show users");
+	local ipt = io.popen("/usr/bin/occtl show users >/dev/null 2>&1");
 
 	if ipt then
 
@@ -69,7 +69,7 @@ function ocserv_disconnect(num)
 	local idx = tonumber(num)
 
 	if idx and idx > 0 then
-		luci.sys.call("/usr/bin/occtl disconnect id %d" % idx)
+		luci.sys.call("/usr/bin/occtl disconnect id %d >/dev/null 2>&1" % idx)
 		luci.http.status(200, "OK")
 
 		return

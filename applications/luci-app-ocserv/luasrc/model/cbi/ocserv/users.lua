@@ -40,7 +40,7 @@ end
 end
 
 local lusers = { }
-local fd = io.popen("/usr/bin/occtl show users", "r")
+local fd = io.popen("/usr/bin/occtl show users >/dev/null 2>&1", "r")
 if fd then local ln
 	repeat
 		ln = fd:read("*l")
