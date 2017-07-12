@@ -1,0 +1,7 @@
+
+config general
+	option screen_time '10'
+	option refresh_time '10'
+	option psk_hide '0'
+	option cputemp '0'
+	option usb3_disable '1'
