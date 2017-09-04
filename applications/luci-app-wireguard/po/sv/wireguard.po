@@ -1,5 +1,5 @@
 msgid ""
-msgstr "Content-Type: text/plain; charset=UTF-8"
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
 msgid "Allowed IPs"
 msgstr "Tillåtna IP-adresser"
@@ -20,7 +20,7 @@ msgid "Endpoint"
 msgstr "Slutpunkt"
 
 msgid "Firewall Mark"
-msgstr ""
+msgstr "Brandväggsmarkering"
 
 msgid "Interface"
 msgstr "Gränssnitt"
@@ -38,10 +38,10 @@ msgid "Never"
 msgstr "Aldrig"
 
 msgid "Peer"
-msgstr ""
+msgstr "Jämlike"
 
 msgid "Persistent Keepalive"
-msgstr ""
+msgstr "Hålla vid liv ständigt"
 
 msgid "Public Key"
 msgstr "Publik nyckel"

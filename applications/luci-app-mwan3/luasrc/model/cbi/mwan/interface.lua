@@ -111,7 +111,7 @@ mwan_interface = m5:section(TypedSection, "interface", translate("Interfaces"),
 	"Interfaces may not share the same name as configured members, policies or rules"))
 	mwan_interface.addremove = true
 	mwan_interface.dynamic = false
-	mwan_interface.sectionhead = "Interface"
+	mwan_interface.sectionhead = translate("Interface")
 	mwan_interface.sortable = false
 	mwan_interface.template = "cbi/tblsection"
 	mwan_interface.extedit = dsp.build_url("admin", "network", "mwan", "configuration", "interface", "%s")
@@ -142,6 +142,16 @@ track_ip = mwan_interface:option(DummyValue, "track_ip", translate("Tracking IP"
 				ipList = ipList .. v .. "<br />"
 			end
 			return ipList
+		else
+			return "&#8212;"
+		end
+	end
+
+track_method = mwan_interface:option(DummyValue, "track_method", translate("Tracking method"))
+	track_method.rawhtml = true
+	function track_method.cfgvalue(self, s)
+		if tracked then
+			return self.map:get(s, "track_method") or "&#8212;"
 		else
 			return "&#8212;"
 		end
