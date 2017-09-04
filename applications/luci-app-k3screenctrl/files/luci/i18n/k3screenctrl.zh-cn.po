@@ -16,11 +16,41 @@ msgstr "如果没有立即生效，请重启系统。"
 msgid "Screen time :"
 msgstr "亮屏时间："
 
+msgid "Operating Mode"
+msgstr "运行模式"
+
+msgid "Current Mode"
+msgstr "当前模式"
+
+msgid "AP Mode"
+msgstr "AP 模式"
+
+msgid "Router Mode"
+msgstr "路由模式"
+
+msgid "Display partial data when APmode is enabled, Use Router Mode to disable AP mode."
+msgstr "AP模式，请通过WAN网口连接，AP自身管理地址由上级路由DHCP分配，如需固定请修改Lan口地址。</br>关闭AP模式请选回“路由模式”，两种模式均为一次性动作，切换完成之后运行模式将被自动修改为“当前模式”"
+
+msgid "Other Setting"
+msgstr "其他设置"
+
+msgid "Display Mac Address or Lan IP Address or Router Uptime"
+msgstr "显示MAC 地址、路由管理地址或者路由运行时间"
+
+msgid "Lan IP Address"
+msgstr "路由管理地址"
+
+msgid "Router Uptime"
+msgstr "路由运行时间"
+
+msgid "Mac Address"
+msgstr "Mac 地址"
+
 msgid "Switch off USB3.0"
-msgstr "关闭 USB3.0"
+msgstr "USB抗干扰"
 
 msgid "Turn off USB3.0, reduce effects of interference to 2.4G wireless, <b><font color=\"red\">it works after rebooted</font></b>."
-msgstr "关闭 USB3.0，降低对 2.4G 无线干扰，<b><font color=\"red\">重启路由生效</font></b>."
+msgstr "勾选以关闭 USB3.0，降低对 2.4G 无线干扰，<b><font color=\"red\">重启路由生效</font></b>."
 
 msgid "This time no action, the screen will close."
 msgstr "这段时间没有操作，屏幕将关闭。"

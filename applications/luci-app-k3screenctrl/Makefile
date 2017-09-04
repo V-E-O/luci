@@ -4,7 +4,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-k3screenctrl
 PKG_VERSION:=1.0.0
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_LICENSE:=GPLv3
 PKG_LICENSE_FILES:=LICENSE
@@ -34,6 +34,7 @@ endef
 
 define Package/$(PKG_NAME)/conffiles
 /etc/config/k3screenctrl
+/etc/k3screenctrl-apmode
 endef
 
 define Build/Configure
@@ -61,8 +62,9 @@ define Package/$(PKG_NAME)/install
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/k3screenctrl.*.lmo $(1)/usr/lib/lua/luci/i18n/
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/model/cbi
 	$(INSTALL_DATA) ./files/luci/model/cbi/k3screenctrl.lua $(1)/usr/lib/lua/luci/model/cbi/
-	$(INSTALL_DIR) $(1)/etc/config
-	$(INSTALL_DATA) ./files/root/etc/config/k3screenctrl $(1)/etc/config/k3screenctrl
+	$(INSTALL_DIR) $(1)/etc $(1)/etc/config
+	$(INSTALL_CONF) ./files/root/etc/config/k3screenctrl $(1)/etc/config/k3screenctrl
+	$(INSTALL_CONF) ./files/root/etc/k3screenctrl-apmode $(1)/etc/k3screenctrl-apmode
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
 	$(INSTALL_BIN) ./files/root/etc/uci-defaults/luci-app-k3screenctrl $(1)/etc/uci-defaults/luci-app-k3screenctrl
 endef

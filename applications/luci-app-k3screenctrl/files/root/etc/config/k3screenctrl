@@ -5,3 +5,5 @@ config general
 	option psk_hide '0'
 	option cputemp '0'
 	option usb3_disable '1'
+	option router_uptime '0'
+	option route_mode 'none'
